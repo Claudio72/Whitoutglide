@@ -75,11 +75,11 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
         }
 
         if(cf.isEmpty()){
-            cf.add(new Clases("DAM", R.drawable.informatica));
+            cf.add(new Clases("DAM", R.drawable.dev));
             cf.add(new Clases("EVA", R.drawable.informatica));
             cf.add(new Clases("GAD", R.drawable.informatica));
-            cf.add(new Clases("SMR", R.drawable.informatica));
-            cf.add(new Clases("SEA", R.drawable.informatica));
+            cf.add(new Clases("SMR", R.drawable.smr));
+            cf.add(new Clases("SEA", R.drawable.sea));
             cf.add(new Clases("IEA", R.drawable.informatica));
             cf.add(new Clases("FPB", R.drawable.informatica));
             cf.add(new Clases("FIN", R.drawable.informatica));

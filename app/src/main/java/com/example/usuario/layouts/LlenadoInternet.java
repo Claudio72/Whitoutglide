@@ -20,6 +20,8 @@ import android.widget.Toast;
 import org.apache.commons.net.util.Base64;
 
 import java.io.InputStream;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
 import java.net.URL;
 import java.net.URLConnection;
 import java.sql.Connection;
@@ -29,7 +31,9 @@ import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 import java.util.zip.DataFormatException;
 
 /**
@@ -41,7 +45,7 @@ public class LlenadoInternet extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
-
+    public static String ip;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,10 +105,39 @@ public class LlenadoInternet extends AppCompatActivity {
 
 
                     try {
+                        String io="";
+
+                        List<NetworkInterface> interfaces = Collections.list(NetworkInterface.getNetworkInterfaces());
+                        System.out.println("Cantidad de interfaces"+interfaces.size());//Network interfaces devuelve un enumerado con un listado de interfazes del movil
+                        for (NetworkInterface intf : interfaces) {
+                            List<InetAddress> addrs = Collections.list(intf.getInetAddresses()); //Cogemos el siguiente objecto network interfaces y cogemos el inetaddress que no s la ip que usamos
+                            for (InetAddress addr : addrs) {
+                                if (!addr.isLoopbackAddress()) { //metodo comprueba si la ip es localhost
+                                    String sAddr = addr.getHostAddress();
+                                    //boolean isIPv4 = InetAddressUtils.isIPv4Address(sAddr);
+                                    boolean isIPv4 = sAddr.indexOf(':')<0;
+
+                                    if (true) {
+                                        if (isIPv4)
+                                            io=addr.getHostAddress();
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+
+                        System.out.println("ip"+io);
+                        if(io.equals("10.10.4.150")){
+
+                        }else{
+                            io="www.iesmurgi.org:3306";
+                        }
+                        System.out.println(io);
+
 
                         Connection con;//Creamos en objeto conexion
-                    Class.forName("com.mysql.jdbc.Driver");//cargamos la clase con los drivers mysql previamente tenemos que tener cargar los driver en la libreria
-                    con = DriverManager.getConnection("jdbc:mysql://www.iesmurgi.org:3306/base20173", "ubase20173", "pbase20173");
+                        Class.forName("com.mysql.jdbc.Driver");//cargamos la clase con los drivers mysql previamente tenemos que tener cargar los driver en la libreria
+                        con = DriverManager.getConnection("jdbc:mysql://www.iesmurgi.org:3306/base20173", "ubase20173", "pbase20173");
 
                     Statement coger = con.createStatement();
                     System.out.println(clase);
@@ -112,6 +145,7 @@ public class LlenadoInternet extends AppCompatActivity {
                     if(clase.equals("Bachiller B"))clase="BACHB";
                     if(clase.equals("Bachiller C"))clase="BACHC";
 
+                        System.out.println(clase);
                     String sql="select * from "+clase;
 
                     ResultSet a= coger.executeQuery(sql);
@@ -143,6 +177,8 @@ public class LlenadoInternet extends AppCompatActivity {
                         System.out.println("     "+anio+" "+mes+" "+dia);
 
                         InputStream in = uc.getInputStream();
+                        System.out.println(io);
+
                         Bitmap fot= BitmapFactory.decodeStream(in);
                         alumnos.add(new Alumno(a.getString(2), fot, clase));
                     }
@@ -151,6 +187,7 @@ public class LlenadoInternet extends AppCompatActivity {
 
                 } catch (Exception e) {
                     System.out.println("a"+e.toString());
+                        e.printStackTrace();
                 }
 
 

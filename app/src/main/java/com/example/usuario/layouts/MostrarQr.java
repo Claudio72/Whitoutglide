@@ -2,6 +2,7 @@ package com.example.usuario.layouts;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
@@ -24,10 +26,11 @@ import com.google.zxing.common.BitMatrix;
 
 public class MostrarQr extends DialogFragment {
     private static Alumno usuari;
-
-    public static MostrarQr newInstance(Alumno alumno) {
+    private static Context contextt;
+    public static MostrarQr newInstance(Alumno alumno, Context context) {
         MostrarQr frag = new MostrarQr();
         usuari=alumno;
+        contextt=context;
         Bundle args = new Bundle();
         args.putString("title", alumno.getuser());
         frag.setArguments(args);

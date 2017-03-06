@@ -27,8 +27,7 @@ public class Detalles extends AppCompatActivity {
         TextView nombre=(TextView)findViewById(R.id.nombreD);
         TextView curso=(TextView)findViewById(R.id.cursoD);
 
-        byte[] byteArray = bundle.getByteArray("imagen");
-        Bitmap bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+        Bitmap bmp= intent.getParcelableExtra("imagen");
         image.setImageBitmap(bmp);
         curso.setText(intent.getStringExtra("cu"));
         nombre.setText(bundle.getString("nombre"));

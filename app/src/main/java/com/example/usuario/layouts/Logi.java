@@ -71,7 +71,6 @@ public class Logi extends AsyncTask<String, Void, Alumno> {
                 io="www.iesmurgi.org:3306";
             }
             System.out.println(io);
-
             Connection con;//Creamos en objeto conexion
             Class.forName("com.mysql.jdbc.Driver");//cargamos la clase con los drivers mysql previamente tenemos que tener cargar los driver en la libreria
             con = DriverManager.getConnection("jdbc:mysql://"+io+"/base20173", "ubase20173", "pbase20173");

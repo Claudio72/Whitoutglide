@@ -1,6 +1,7 @@
 package com.example.usuario.layouts;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.FragmentManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.DialogFragment;
@@ -10,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -21,6 +23,7 @@ public class Fragmentos extends Fragment {
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     private ArrayList<Clases> clases=null;
+    public static Alumno alumno;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -32,7 +35,8 @@ public class Fragmentos extends Fragment {
             @Override
             public void onClick(View view) {
                 FragmentManager fm=getFragmentManager();
-                DialogFragment newFragment = MostrarQr.newInstance(Principal.AlumnoActual);
+
+                DialogFragment newFragment = MostrarQr.newInstance(alumno, getContext());
                 newFragment.show(fm, "tag");
 
             }

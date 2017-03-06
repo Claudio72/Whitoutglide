@@ -34,8 +34,7 @@ public class LoginActivity extends AppCompatActivity {
                     if(a==null){
 
                     }else {
-                        Principal principal = new Principal();
-                        principal.AlumnoActual = a;
+                        Fragmentos.alumno=a;
                         System.out.println(a.getNombre());
                         Intent intent = new Intent(getApplicationContext(), Cursos.class);
                         startActivity(intent);

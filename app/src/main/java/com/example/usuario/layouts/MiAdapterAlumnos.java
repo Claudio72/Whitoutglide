@@ -44,14 +44,12 @@ public class MiAdapterAlumnos extends RecyclerView.Adapter<MiAdapterAlumnos.View
                     Bitmap image=imagen.getDrawingCache();
                     Bundle extra=new Bundle();
 
-                    ByteArrayOutputStream stream=new ByteArrayOutputStream();
-                    image.compress(Bitmap.CompressFormat.PNG, 100, stream);
-                    byte[] byteArray = stream.toByteArray();
+
 
                     Intent intent=new Intent(view.getContext(), Detalles.class);
                     intent.putExtra("nombre", alumnos.get(getAdapterPosition()).getNombre());
                     intent.putExtra("cu", alumnos.get(getAdapterPosition()).getCurso());
-                    intent.putExtra("imagen", byteArray);
+                    intent.putExtra("imagen", image);
                     intent.putExtras(extra);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     view.getContext().startActivity(intent);

@@ -18,7 +18,6 @@
         </activity>
         <activity android:name=".Cursos"/>
         <activity android:name=".LlenadoInternet"/>
-        <activity android:name=".Principal"/>
         <activity android:name=".Detalles"/>
     </application>
 
