@@ -43,10 +43,10 @@ public class Logi extends AsyncTask<String, Void, Alumno> {
     @Override
     protected Alumno doInBackground(String... params) {
         try {
-            String io=null;
+            String io="";
 
             List<NetworkInterface> interfaces = Collections.list(NetworkInterface.getNetworkInterfaces());
-            System.out.println(interfaces.size());//Network interfaces devuelve un enumerado con un listado de interfazes del movil
+            System.out.println("Cantidad de interfaces"+interfaces.size());//Network interfaces devuelve un enumerado con un listado de interfazes del movil
                 for (NetworkInterface intf : interfaces) {
                     List<InetAddress> addrs = Collections.list(intf.getInetAddresses()); //Cogemos el siguiente objecto network interfaces y cogemos el inetaddress que no s la ip que usamos
                     for (InetAddress addr : addrs) {
@@ -57,7 +57,7 @@ public class Logi extends AsyncTask<String, Void, Alumno> {
 
                             if (true) {
                                 if (isIPv4)
-                                    io=sAddr;
+                                    io=addr.getHostAddress();
                                     break;
                             }
                         }
@@ -71,6 +71,7 @@ public class Logi extends AsyncTask<String, Void, Alumno> {
                 io="www.iesmurgi.org:3306";
             }
             System.out.println(io);
+
             Connection con;//Creamos en objeto conexion
             Class.forName("com.mysql.jdbc.Driver");//cargamos la clase con los drivers mysql previamente tenemos que tener cargar los driver en la libreria
             con = DriverManager.getConnection("jdbc:mysql://"+io+"/base20173", "ubase20173", "pbase20173");
@@ -116,12 +117,7 @@ public class Logi extends AsyncTask<String, Void, Alumno> {
         } catch (Exception e) {
             System.out.println("a"+e.toString());
 
-            Handler handler =  new Handler(ActivityActual.getMainLooper());
-            handler.post( new Runnable(){
-                public void run(){
-                    Toast.makeText(ActivityActual, "no hay internet",Toast.LENGTH_LONG).show();
-                }
-            });        }
+               }
 
         return null;
     }
