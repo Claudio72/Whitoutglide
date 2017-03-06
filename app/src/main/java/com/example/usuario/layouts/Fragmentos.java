@@ -15,7 +15,6 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import static com.example.usuario.layouts.Principal.AlumnoActual;
 
 public class Fragmentos extends Fragment {
 
