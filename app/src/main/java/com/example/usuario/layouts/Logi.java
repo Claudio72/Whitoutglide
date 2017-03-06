@@ -64,7 +64,7 @@ public class Logi extends AsyncTask<String, Void, Alumno> {
                     }
                 }
 
-            System.out.println("ip"+io);
+            System.out.println("ipfefeeefefef "+io);
             if(io.equals("10.10.4.150")){
 
             }else{
