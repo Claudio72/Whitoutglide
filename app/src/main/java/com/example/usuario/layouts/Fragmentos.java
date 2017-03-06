@@ -32,8 +32,9 @@ public class Fragmentos extends Fragment {
             @Override
             public void onClick(View view) {
                 FragmentManager fm=getFragmentManager();
-                DialogFragment newFragment = MostrarQr.newInstance(Principal.AlumnoActual.getuser());
+                DialogFragment newFragment = MostrarQr.newInstance(Principal.AlumnoActual);
                 newFragment.show(fm, "tag");
+
             }
         });
 

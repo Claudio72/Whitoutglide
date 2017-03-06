@@ -36,7 +36,7 @@ public class Principal extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 FragmentManager fm=getSupportFragmentManager();
-                DialogFragment newFragment = MostrarQr.newInstance(AlumnoActual.getuser());
+                DialogFragment newFragment = MostrarQr.newInstance(AlumnoActual);
                 newFragment.show(fm, "tag");
             }
         });

@@ -23,13 +23,13 @@ import com.google.zxing.common.BitMatrix;
  */
 
 public class MostrarQr extends DialogFragment {
-    private static String usuari;
+    private static Alumno usuari;
 
-    public static MostrarQr newInstance(String title) {
+    public static MostrarQr newInstance(Alumno alumno) {
         MostrarQr frag = new MostrarQr();
-        usuari=title;
+        usuari=alumno;
         Bundle args = new Bundle();
-        args.putString("title", title);
+        args.putString("title", alumno.getuser());
         frag.setArguments(args);
         return frag;
     }
@@ -44,10 +44,18 @@ public class MostrarQr extends DialogFragment {
         View v = inflater.inflate(R.layout.qr, container, false);
         ImageView im=(ImageView) v.findViewById(R.id.im_qr);
         System.out.println(usuari);
+        Bitmap a;
         try {
-            Bitmap a=StringtoBitmap(usuari);
+            if(usuari.getQr()==null) {
+                System.out.println("El usuario no tiene qr");
+                usuari.setQr(StringtoBitmap(usuari.getuser()));
+                a=usuari.getQr();
+            }else{
+                a=usuari.getQr();
+            }
             im.setImageBitmap(a);
         }catch (Exception e) {
+            e.printStackTrace();
         }
         return v;
     }

@@ -8,7 +8,7 @@ import android.graphics.Bitmap;
 
 public class Alumno {
     private String nombre, user, curso;
-    private Bitmap imagen;
+    private Bitmap imagen, qr=null;
 
     Alumno(String nombre, Bitmap imagen, String cu){
         this.nombre=nombre;
@@ -35,5 +35,11 @@ public class Alumno {
     }
 
     public String getCurso(){ return curso; }
+
+    public void setQr(Bitmap codigo){qr=codigo; }
+
+    public Bitmap getQr(){
+        return qr;
+    }
 
 }
