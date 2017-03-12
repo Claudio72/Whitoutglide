@@ -14,7 +14,7 @@ import android.widget.TextView;
  */
 
 public class Detalles extends AppCompatActivity {
-
+    public static Alumno alumno;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,9 +27,8 @@ public class Detalles extends AppCompatActivity {
         TextView nombre=(TextView)findViewById(R.id.nombreD);
         TextView curso=(TextView)findViewById(R.id.cursoD);
 
-        Bitmap bmp= intent.getParcelableExtra("imagen");
-        image.setImageBitmap(bmp);
-        curso.setText(intent.getStringExtra("cu"));
-        nombre.setText(bundle.getString("nombre"));
+        image.setImageBitmap(alumno.getImagen());
+        curso.setText(alumno.getCurso());
+        nombre.setText(alumno.getNombre());
     }
 }

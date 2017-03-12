@@ -8,6 +8,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Handler;
+import android.text.format.Formatter;
 import android.widget.Toast;
 
 
@@ -52,9 +53,10 @@ public class Logi extends AsyncTask<String, Void, Alumno> {
                     for (InetAddress addr : addrs) {
                         if (!addr.isLoopbackAddress()) { //metodo comprueba si la ip es localhost
                             String sAddr = addr.getHostAddress();
+                            System.out.println("ip "+sAddr);
                             //boolean isIPv4 = InetAddressUtils.isIPv4Address(sAddr);
                             boolean isIPv4 = sAddr.indexOf(':')<0;
-
+                            io= Formatter.formatIpAddress(addr.hashCode());
                             if (true) {
                                 if (isIPv4)
                                     io=addr.getHostAddress();
@@ -65,15 +67,16 @@ public class Logi extends AsyncTask<String, Void, Alumno> {
                 }
 
             System.out.println("ip"+io);
-            if(io.equals("10.10.4.150")){
-
+            if(io.startsWith("10.")){
+                LlenadoInternet.redcentro=true;
             }else{
                 io="www.iesmurgi.org:3306";
+                LlenadoInternet.redcentro=false;
             }
             System.out.println(io);
             Connection con;//Creamos en objeto conexion
             Class.forName("com.mysql.jdbc.Driver");//cargamos la clase con los drivers mysql previamente tenemos que tener cargar los driver en la libreria
-            con = DriverManager.getConnection("jdbc:mysql://"+io+"/base20173", "ubase20173", "pbase20173");
+            con = DriverManager.getConnection("jdbc:mysql://www.iesmurgi.org:3306/base20173", "ubase20173", "pbase20173");
 
             Statement coger = con.createStatement();
 
@@ -110,7 +113,7 @@ public class Logi extends AsyncTask<String, Void, Alumno> {
 
 
             }
-
+            con.close();
             return alumno;
 
         } catch (Exception e) {
