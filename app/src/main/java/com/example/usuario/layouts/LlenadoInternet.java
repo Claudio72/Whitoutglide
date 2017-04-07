@@ -21,6 +21,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import dmax.dialog.SpotsDialog;
 
 
 /**
@@ -32,12 +33,13 @@ public class LlenadoInternet extends AppCompatActivity {
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     public static boolean redcentro;
+    public static SpotsDialog spotdialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recycler);
         Bundle bundle=getIntent().getExtras();
-
+        spotdialog=new SpotsDialog(this,"cargando");
         ArrayList<Alumno> alumnos=new ArrayList<>();
         FloatingActionButton fab=(FloatingActionButton)findViewById(R.id.fab);
         fab.setVisibility(View.GONE);
@@ -46,6 +48,7 @@ public class LlenadoInternet extends AppCompatActivity {
         BD b=new BD(bundle.getString("Curso"), context);
 
         try {
+            spotdialog.show();
             alumnos = b.execute().get();
 
         }catch (Exception e){
@@ -75,7 +78,11 @@ public class LlenadoInternet extends AppCompatActivity {
             context=co;
         }
 
+        @Override
+        protected void onPostExecute(ArrayList<Alumno> alumnos) {
+            super.onPostExecute(alumnos);
 
+        }
 
         boolean redCentro=false;
         @Override
@@ -150,6 +157,8 @@ public class LlenadoInternet extends AppCompatActivity {
                         System.out.println("ArrayFiltrado"+arrayFiltrado);
 
 
+                    }else{
+                        arrayFiltrado=a.getString(4);
                     }
                     System.out.println("arrayfiltrado"+arrayFiltrado);
                     /*URL url=new URL(arrayFiltrado);
@@ -164,13 +173,13 @@ public class LlenadoInternet extends AppCompatActivity {
                     //Bitmap fot= BitmapFactory.decodeStream(in);
                     alumnos.add(new Alumno(a.getString(2), clase, arrayFiltrado, 0));
                 }
+                spotdialog.dismiss();
                 return alumnos;
 
             } catch (Exception e) {
                 System.out.println("a"+e.toString());
                 e.printStackTrace();
             }
-
 
 
 

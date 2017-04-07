@@ -38,7 +38,7 @@ import static com.bumptech.glide.gifdecoder.GifHeaderParser.TAG;
  * Created by Jose on 26/02/2017.
  */
 
-public class MiAdapterAlumnos extends RecyclerView.Adapter<MiAdapterAlumnos.ViewHolder>{
+public class  MiAdapterAlumnos extends RecyclerView.Adapter<MiAdapterAlumnos.ViewHolder>{
 
     private Context context;
     private ArrayList<Alumno> alumnos;
